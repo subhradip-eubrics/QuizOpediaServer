@@ -32,6 +32,7 @@ import { AuthModule } from './modules/auth.module';
 import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { QuizModule } from './modules/quiz.module';
 import { AttemptModule } from './modules/attempt.module';
+import { AiModule } from './modules/ai.module';
 
 @Module({
   imports: [
@@ -57,7 +58,8 @@ import { AttemptModule } from './modules/attempt.module';
 
     AuthModule,
     QuizModule,
-    AttemptModule
+    AttemptModule,
+    AiModule,
   ],
 })
 export class AppModule {}

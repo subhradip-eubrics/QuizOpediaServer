@@ -1,8 +1,10 @@
+import { AiResponseDto } from 'src/dtos/ai.dto';
 import { genAI } from './gemini.client';
 
 export async function generateQuizFromAI(topic: string, numOfQn: number) {
+console.log("hello");
 
-    const prompt = `
+  const prompt = `
 You are to generate a quiz in JSON format.
 
 - Topic: "${topic}"
@@ -32,24 +34,62 @@ The final output must strictly follow this **JSON format**:
 
 `;
 
-    const result = await genAI.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: `${prompt}`,
-    });
+  const result = await genAI.models.generateContent({
+    model: 'gemini-2.5-flash',
+    contents: `${prompt}`,
+  });
 
-    const text = result.text;
-    // console.log(text);
-    const jsonStart = text.indexOf('{');
-    const jsonEnd = text.lastIndexOf('}') + 1;
+  const text = result.text;
+  // console.log(text);
+  const jsonStart = text.indexOf('{');
+  const jsonEnd = text.lastIndexOf('}') + 1;
 
-    const jsonString = text.slice(jsonStart, jsonEnd);
-    console.log(jsonString);
-    
-    return JSON.parse(jsonString);
+  const jsonString = text.slice(jsonStart, jsonEnd);
+  console.log(jsonString);
+
+  return JSON.parse(jsonString);
 }
 
 // generateQuizFromAI("4.5 Gen Russian Fighter Jets", 2);
 
 // export async function generateAiAssist() {
-    
+
 // }
+
+
+export async function aiFeedBack(data: AiResponseDto) {
+  const {
+    question,
+    userAnswer,
+    correctAnswer,
+    prompt
+  } = data;
+
+  console.log(data);
+  
+  const mainPrompt = `
+  give a very short answer within 30-40 words for the ${prompt}, where question is ${question}, correction option: ${correctAnswer}, userselected the option: ${userAnswer}
+  `;
+
+  const result = await genAI.models.generateContent({
+    model: 'gemini-2.5-flash',
+    contents: `${mainPrompt}`
+  });
+
+  const text = result.text;
+
+  console.log("Text: ", text);
+  
+  return text;
+}
+
+
+// const dat = {
+//   "question": "How many jet engines are there in Su 30 MKI?",
+//   "userAnswer": "3",
+//   "correctAnswer": "2",
+//   "prompt": "Why my answer is wrong??"
+// }
+
+
+// aiFeedBack(dat);

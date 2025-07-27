@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateQuizFromAI = generateQuizFromAI;
+exports.aiFeedBack = aiFeedBack;
 const gemini_client_1 = require("./gemini.client");
 async function generateQuizFromAI(topic, numOfQn) {
+    console.log("hello");
     const prompt = `
 You are to generate a quiz in JSON format.
 
@@ -42,5 +44,19 @@ The final output must strictly follow this **JSON format**:
     const jsonString = text.slice(jsonStart, jsonEnd);
     console.log(jsonString);
     return JSON.parse(jsonString);
+}
+async function aiFeedBack(data) {
+    const { question, userAnswer, correctAnswer, prompt } = data;
+    console.log(data);
+    const mainPrompt = `
+  give a very short answer within 30-40 words for the ${prompt}, where question is ${question}, correction option: ${correctAnswer}, userselected the option: ${userAnswer}
+  `;
+    const result = await gemini_client_1.genAI.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: `${mainPrompt}`
+    });
+    const text = result.text;
+    console.log("Text: ", text);
+    return text;
 }
 //# sourceMappingURL=ai.helper.js.map
