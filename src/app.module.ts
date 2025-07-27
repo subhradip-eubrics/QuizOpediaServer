@@ -12,10 +12,10 @@
 //   imports: [
 //     ConfigModule.forRoot(envConfig),
 //     TypeOrmModule.forRootAsync(typeOrmConfig),
-//     AuthModule,     // ✅ /api/auth/*
-//     // QuizModule,     // ✅ /api/quiz/*
-//     // AttemptModule,  // ✅ /api/attempt/*
-//     // AiModule,       // ✅ /api/ai/*
+//     AuthModule,     // /api/auth/*
+//     // QuizModule,     //  /api/quiz/*
+//     // AttemptModule,  //  /api/attempt/*
+//     // AiModule,       //  /api/ai/*
 //   ],
 // })
 // export class AppModule {}
@@ -30,6 +30,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 // import { Attempt } from './entities/attempt.entity';
 import { AuthModule } from './modules/auth.module';
 import { typeOrmAsyncConfig } from './config/typeorm.config';
+import { QuizModule } from './modules/quiz.module';
+import { AttemptModule } from './modules/attempt.module';
 
 @Module({
   imports: [
@@ -54,6 +56,8 @@ import { typeOrmAsyncConfig } from './config/typeorm.config';
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
 
     AuthModule,
+    QuizModule,
+    AttemptModule
   ],
 })
 export class AppModule {}

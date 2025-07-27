@@ -41,7 +41,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Quiz.prototype, "createdAt", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => question_entity_1.Question, (question) => question.quiz),
+    (0, typeorm_1.OneToMany)(() => question_entity_1.Question, (question) => question.quiz, { cascade: true }),
     __metadata("design:type", Array)
 ], Quiz.prototype, "questions", void 0);
 __decorate([

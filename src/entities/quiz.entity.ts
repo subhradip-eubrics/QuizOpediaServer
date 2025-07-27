@@ -22,7 +22,7 @@ export class Quiz {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToMany(() => Question, (question) => question.quiz)
+  @OneToMany(() => Question, (question) => question.quiz, { cascade: true })
   questions: Question[];
 
   @OneToMany(() => Attempt, (attempt) => attempt.quiz)

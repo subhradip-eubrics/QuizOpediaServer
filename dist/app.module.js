@@ -12,6 +12,8 @@ const typeorm_1 = require("@nestjs/typeorm");
 const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./modules/auth.module");
 const typeorm_config_1 = require("./config/typeorm.config");
+const quiz_module_1 = require("./modules/quiz.module");
+const attempt_module_1 = require("./modules/attempt.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -23,6 +25,8 @@ exports.AppModule = AppModule = __decorate([
             }),
             typeorm_1.TypeOrmModule.forRootAsync(typeorm_config_1.typeOrmAsyncConfig),
             auth_module_1.AuthModule,
+            quiz_module_1.QuizModule,
+            attempt_module_1.AttemptModule
         ],
     })
 ], AppModule);

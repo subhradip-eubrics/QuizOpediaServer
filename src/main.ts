@@ -11,13 +11,13 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
-  // ✅ Enable CORS (Nest uses Express internally, no need to import express)
+  // Enable CORS (Nest uses Express internally, no need to import express)
   app.enableCors();
 
-  // ✅ Global DTO validation
+  // Global DTO validation
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
-  // ✅ Prefix all routes with /api
+  // Prefix all routes with /api
   app.setGlobalPrefix('api');
 
   const PORT = process.env.PORT || 5000;

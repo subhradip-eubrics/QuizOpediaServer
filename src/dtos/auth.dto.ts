@@ -10,7 +10,7 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsString()
-  role?: string; // Optional because not every signup sets role
+  role?: string; // Optional
 }
 
 export class LoginUserDto {
