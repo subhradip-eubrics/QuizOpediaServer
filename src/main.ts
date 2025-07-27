@@ -1,5 +1,5 @@
-(global as any).crypto = require('crypto');
-(global as any).crypto.randomUUID = require('uuid').v4;
+// (global as any).crypto = require('crypto');            //Node 20+ don't need this
+// (global as any).crypto.randomUUID = require('uuid').v4;
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
